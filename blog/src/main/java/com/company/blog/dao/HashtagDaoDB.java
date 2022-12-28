@@ -1,7 +1,6 @@
 package com.company.blog.dao;
 
 import com.company.blog.entities.Hashtag;
-import com.company.blog.entities.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class HashtagDaoDB implements HashtagDao{

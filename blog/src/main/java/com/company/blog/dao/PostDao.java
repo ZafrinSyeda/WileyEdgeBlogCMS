@@ -23,6 +23,12 @@ public interface PostDao {
     List<Post> getApprovedPosts();
 
     /**
+     * Used to only display unapproved posts
+     * @return every post entity where isApproved is false
+     */
+    List<Post> getUnapprovedPosts();
+
+    /**
      * returns a single post given some id
      * @param id of the post to be returned
      * @return the post that has the corresponding id

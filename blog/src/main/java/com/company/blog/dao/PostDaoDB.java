@@ -48,6 +48,19 @@ public class PostDaoDB implements PostDao {
     }
 
     /**
+     * Used to only display unapproved posts
+     *
+     * @return every post entity where isApproved is false
+     */
+    @Override
+    public List<Post> getUnapprovedPosts() {
+        final String SELECT_ALL_UNAPPROVED_POSTS = "select * from post where isApproved = false";
+        List<Post> allUnapprovedPosts = jdbc.query(SELECT_ALL_UNAPPROVED_POSTS, new PostMapper());
+        addHashtagsToList(allUnapprovedPosts);
+        return allUnapprovedPosts;
+    }
+
+    /**
      * returns a single post given some id
      *
      * @param id of the post to be returned
@@ -70,6 +83,11 @@ public class PostDaoDB implements PostDao {
         }
     }
 
+    /**
+     * used to find all the hashtags that are related to a post
+     * @param id of the post whose hashtags are being checked for
+     * @return all the hashtags related to a post
+     */
     private List<Hashtag> getPostHashtags(int id) {
         try {
             /**
