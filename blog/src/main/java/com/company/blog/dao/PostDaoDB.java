@@ -48,6 +48,19 @@ public class PostDaoDB implements PostDao {
     }
 
     /**
+     * Used to ensure that only the most recent x approved posts may be displayed
+     *
+     * @return some number of approved posts
+     */
+    @Override
+    public List<Post> getRecentApprovedPosts() {
+        final String SELECT_RECENT_APPROVED_POSTS = "select * from post where isApproved = true order by timePosted desc limit 5";
+        List<Post> recentApprovedPosts = jdbc.query(SELECT_RECENT_APPROVED_POSTS, new PostMapper());
+        addHashtagsToList(recentApprovedPosts);
+        return recentApprovedPosts;
+    }
+
+    /**
      * Used to only display unapproved posts
      *
      * @return every post entity where isApproved is false
@@ -215,7 +228,7 @@ public class PostDaoDB implements PostDao {
         public Post mapRow(ResultSet rs, int index) throws SQLException {
             Post post = new Post();
             post.setId(rs.getInt("id"));
-            post.setTimePosted(LocalDateTime.parse("timePosted"));
+            post.setTimePosted(rs.getTimestamp("timePosted").toLocalDateTime());
             post.setTitle(rs.getString("title"));
             post.setBlogBody(rs.getString("blogBody"));
             post.setApproved(rs.getBoolean("isApproved"));

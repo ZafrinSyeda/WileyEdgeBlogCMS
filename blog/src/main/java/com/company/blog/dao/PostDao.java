@@ -23,6 +23,12 @@ public interface PostDao {
     List<Post> getApprovedPosts();
 
     /**
+     * Used to ensure that only the most recent x approved posts may be displayed
+     * @return some number of approved posts
+     */
+    List<Post> getRecentApprovedPosts();
+
+    /**
      * Used to only display unapproved posts
      * @return every post entity where isApproved is false
      */
