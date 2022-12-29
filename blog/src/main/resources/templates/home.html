@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -36,8 +36,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="addPost">Add Post</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" >
                     <a class="nav-link" href="approvePost">Approve Post</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="logout">Log out</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="login">Login</a>
@@ -50,6 +53,12 @@
 <div class="container">
     <div class="row m-4">
         <h2>Home</h2>
+        <p>Spring Security Thymeleaf tutorial</p>
+        <div sec:authorize="hasRole('USER')">Welcome Back User</div>
+        <div sec:authorize="hasRole('ADMIN')">Welcome Back Admin</div>
+        <div sec:authorize="isAuthenticated()">
+            Text visible only to authenticated users.
+        </div>
     </div>
 </div>
 <!-- End main body -->
