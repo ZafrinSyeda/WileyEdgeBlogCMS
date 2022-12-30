@@ -194,7 +194,7 @@ public class PostDaoDB implements PostDao {
     @Override
     @Transactional
     public void editPost(Post post) {
-        final String UPDATE_POST = "UPDATE post SET timePosted = ?, title = ?, blogBody = ? "
+        final String UPDATE_POST = "UPDATE post SET timePosted = ?, title = ?, blogBody = ?, "
                 + "isApproved = ? WHERE id = ?";
         jdbc.update(UPDATE_POST,
                 Timestamp.valueOf(post.getTimePosted()),

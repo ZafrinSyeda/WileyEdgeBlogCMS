@@ -20,7 +20,6 @@ public class MainController {
     public String home(Model model) {
         List<Post> posts = postDao.getRecentApprovedPosts();
         model.addAttribute("posts", posts);
-
         return "home";
     }
 
@@ -40,11 +39,4 @@ public class MainController {
         return "home";
     }
 
-
-
-
-    @GetMapping("approvePost")
-    public String approvePost() {
-        return "approvePost";
-    }
 }
