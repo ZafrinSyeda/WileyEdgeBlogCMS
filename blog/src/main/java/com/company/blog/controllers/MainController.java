@@ -41,10 +41,7 @@ public class MainController {
     }
 
 
-    @GetMapping("addPost")
-    public String addPost() {
-        return "addPost";
-    }
+
 
     @GetMapping("approvePost")
     public String approvePost() {
