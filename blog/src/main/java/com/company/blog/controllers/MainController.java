@@ -2,6 +2,7 @@ package com.company.blog.controllers;
 
 import com.company.blog.dao.PostDaoDB;
 import com.company.blog.entities.Post;
+import com.company.blog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +15,11 @@ import java.util.List;
 public class MainController {
 
     @Autowired
-    PostDaoDB postDao;
+    BlogService service;
 
     @GetMapping("/")
     public String home(Model model) {
-        List<Post> posts = postDao.getRecentApprovedPosts();
+        List<Post> posts = service.getRecentApprovedPosts();
         model.addAttribute("posts", posts);
         return "home";
     }

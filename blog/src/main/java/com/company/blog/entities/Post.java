@@ -1,5 +1,8 @@
 package com.company.blog.entities;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -7,7 +10,10 @@ import java.util.Objects;
 public class Post {
     private int id;
     private LocalDateTime timePosted;
+    @NotBlank(message = "Title must not be empty.")
+    @Size(max = 75, message="Title must be less than 75 characters.")
     private String title;
+    @NotBlank(message = "Blog body must not be empty.")
     private String  blogBody;
     private boolean isApproved;
     private List<Hashtag> hashtags;

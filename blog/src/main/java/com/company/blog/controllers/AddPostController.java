@@ -4,7 +4,11 @@ import com.company.blog.dao.HashtagDaoDB;
 import com.company.blog.dao.PostDaoDB;
 import com.company.blog.entities.Hashtag;
 import com.company.blog.entities.Post;
+import com.company.blog.service.BlogService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,18 +17,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 @Controller
 public class AddPostController {
 
     @Autowired
-    PostDaoDB postDao;
+    BlogService service;
 
-    @Autowired
-    HashtagDaoDB hashtagDao;
+    Set<ConstraintViolation<Post>> postErrors = new HashSet<>();
 
     @GetMapping("addPost")
-    public String addPost() {
+    public String addPost(Model model) {
+        model.addAttribute("postErrors", postErrors);
         return "addPost";
     }
 
@@ -38,15 +45,14 @@ public class AddPostController {
         post.setTitle(title);
         post.setBlogBody(blogBody);
 
-        String[] hashtagsArr = hashtags.split(",");
-        hashtagsArr = hashtags.trim().split("[#,\\s+]+");
+        String[] hashtagsArr = hashtags.trim().split("[#,\\s+]+");
         List<Hashtag> hashtagsList = new ArrayList<>();
 
         for (String hashtagName : hashtagsArr) {
             if (!hashtagName.equals("")) {
                 Hashtag ht = new Hashtag();
                 ht.setName(hashtagName);
-                Hashtag htWithId = hashtagDao.addHashtag(ht);
+                Hashtag htWithId = service.addHashtag(ht);
                 hashtagsList.add(htWithId);
             }
         }
@@ -58,7 +64,11 @@ public class AddPostController {
             post.setApproved(false);
         }
 
-        postDao.addNewPost(post);
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        postErrors = validate.validate(post);
+        if(postErrors.isEmpty()) {
+            service.addNewPost(post);
+        }
 
         return "redirect:/addPost";
     }

@@ -58,6 +58,11 @@
         <h2>Add Post</h2>
         <form action="addPost" method="POST">
             <div class="row justify-content-center">
+                <div class="col-md-9"
+                     th:if="${!postErrors.isEmpty()}">
+                    <p class="alert alert-danger" th:each="error : ${postErrors}"
+                       th:text="${error.message}">Error message</p>
+                </div>
                 <div class="col-md-9">
                     <label><h5>Title</h5></label>
                     <div>
@@ -92,7 +97,7 @@
                     <label><h5>Hashtags</h5></label>
                     <div>
                         <input type="text" class="form-control" style="width:100%" maxlength="128"
-                               placeholder="Enter hashtags separated by commas" name="hashtags"/>
+                               placeholder="Enter hashtags separated by commas or spaces" name="hashtags"/>
                     </div>
                 </div>
             </div>
