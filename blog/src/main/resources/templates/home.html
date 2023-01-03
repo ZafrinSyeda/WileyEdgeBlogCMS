@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<!-- represents the home page of the blog -->
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -52,10 +53,13 @@
 <!-- end of navbar -->
 <div class="container">
     <div>
+        <!-- will have a different message in the title depending on who is logged in or not -->
         <h2 sec:authorize="!isAuthenticated()">Welcome to my Blog</h2>
         <h2 sec:authorize="hasRole('USER')">Welcome Back User</h2>
         <h2 sec:authorize="hasRole('ADMIN')">Welcome Back Admin</h2>
+        <!-- end of title -->
         <br>
+        <!-- shows each of the posts -->
         <div class="row justify-content-center">
             <div class="col-md-9 text-center">
                 <div th:each="post : ${posts}">
@@ -71,6 +75,7 @@
                 </div>
             </div>
         </div>
+        <!-- end of the posts -->
     </div>
 </div>
 <!-- End main body -->

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<!-- page used to add posts -->
 <head>
     <meta charset="UTF-8">
     <title>Add Post</title>
@@ -53,16 +55,21 @@
     </nav>
 </div>
 <!-- end of navbar -->
+
 <div class="container">
     <div>
         <h2>Add Post</h2>
+        <!-- form to add a new post -->
         <form action="addPost" method="POST">
             <div class="row justify-content-center">
+                <!-- errors -->
                 <div class="col-md-9"
                      th:if="${!postErrors.isEmpty()}">
                     <p class="alert alert-danger" th:each="error : ${postErrors}"
                        th:text="${error.message}">Error message</p>
                 </div>
+                <!-- end of errors -->
+                <!-- section to enter the post title -->
                 <div class="col-md-9">
                     <label><h5>Title</h5></label>
                     <div>
@@ -70,7 +77,9 @@
                                placeholder="Enter title here" name="title"/>
                     </div>
                 </div>
+                <!-- end of section to enter the post title -->
             </div>
+            <!-- section to add a new post using tinymce -->
             <div class="row justify-content-center">
                 <div class="col-md-9 ">
                     <textarea id="body" name="blogBody"></textarea>
@@ -92,6 +101,8 @@
                     </script>
                 </div>
             </div>
+            <!-- end of section to add a new post using tinymce -->
+            <!-- section to add hashtags -->
             <div class="row justify-content-center">
                 <div class="col-md-9 ">
                     <label><h5>Hashtags</h5></label>
@@ -101,12 +112,14 @@
                     </div>
                 </div>
             </div>
+            <!-- end of section to add hashtags -->
             <div class="row justify-content-center">
                 <div class="col-md-9 text-center">
                     <input type="submit" value="Post"/>
                 </div>
             </div>
         </form>
+        <!-- end of form to add post -->
     </div>
     <br/>
 </div>

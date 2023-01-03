@@ -2,6 +2,9 @@ package com.company.blog.entities;
 
 import java.util.Objects;
 
+/**
+ * Represents a hashtag object that will be related to the posts within the blog
+ */
 public class Hashtag {
     private int id;
     private String name;

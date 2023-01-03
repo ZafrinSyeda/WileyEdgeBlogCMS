@@ -7,6 +7,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Represents the post objects that hold the relevant attributes relating to the posts on the blog alongside
+ * setting up the aspects that need to be validated
+ */
 public class Post {
     private int id;
     private LocalDateTime timePosted;

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<!-- this page is used to approve the posts in the blog -->
 <head>
     <meta charset="UTF-8">
     <title>Approve Post</title>
@@ -50,9 +51,11 @@
     </nav>
 </div>
 <!-- end of navbar -->
+
 <div class="container">
     <div>
         <h2>Approve Post</h2>
+        <!-- post to be approved -->
         <div class="row justify-content-center">
             <div class="col-md-9 text-center">
                 <div th:each="post : ${posts}">
@@ -63,12 +66,15 @@
                         <i th:text="'#'+${hashtag.name}"/>
                     </span>
                     <hr/>
+                    <!-- button to approve a post -->
                     <td><a href="#" th:href="@{/approvedPost(id=${post.id})}" class="btn btn-success">APPROVE</a></td>
+                    <!-- button to disapprove a post -->
                     <td><a href="#" th:href="@{/disapprovePost(id=${post.id})}" class="btn btn-danger">DISAPPROVE</a></td>
                     <br/>
                 </div>
             </div>
         </div>
+        <!-- end of post to be approved -->
     </div>
 </div>
 <!-- End main body -->

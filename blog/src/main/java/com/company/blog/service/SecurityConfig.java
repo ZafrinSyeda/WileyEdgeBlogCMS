@@ -1,29 +1,29 @@
 package com.company.blog.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 /**
- * Configuration to enable use of Spring Security
+ * Configuration to enable use of Spring Security to allow the user to login to the website and sets up
+ * which pages should be accessed by who
  */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig{
+
+    /**
+     * sets up all the types of users including their username, password, and role, -- including 2 users with
+     * different roles: the admin and user
+     * @return
+     */
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails user = User.withUsername("user")
@@ -37,11 +37,19 @@ public class SecurityConfig{
         return new InMemoryUserDetailsManager(user, admin);
     }
 
+    /**
+     * needed when setting up passwords to encrypt the password when storing it
+     * @return the passwords encoded
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * sets up which pages can be accessed by which user, such as by the admin or user, or someone without
+     * an account
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf()

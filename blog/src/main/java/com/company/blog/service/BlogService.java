@@ -14,6 +14,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Handles the service requirements of the blog alongside providing all of the Dao methods in one space
+ * to be used by the controller
+ */
 @Component
 public class BlogService {
     @Autowired
