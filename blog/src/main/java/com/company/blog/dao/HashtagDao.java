@@ -23,6 +23,13 @@ public interface HashtagDao {
     Hashtag getHashtagById(int id);
 
     /**
+     * retrieves a single hashtag based on the string of the hashtag
+     * @param name of the hashtag to be retrieved
+     * @return the hashtag that contains the name being searched for
+     */
+    Hashtag getHashtagByName(String name);
+
+    /**
      * adds a new hashtag entry to the database
      * @param hashtag the hashtag with all the attributes to be added to the database
      * @return the hashtag object being added

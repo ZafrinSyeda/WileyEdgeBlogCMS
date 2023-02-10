@@ -53,10 +53,9 @@
 <!-- end of navbar -->
 <div class="container">
     <div>
-        <!-- will have a different message in the title depending on who is logged in or not -->
-        <h2 sec:authorize="!isAuthenticated()">Welcome to my Blog</h2>
-        <h2 sec:authorize="hasRole('USER')">Welcome Back User</h2>
-        <h2 sec:authorize="hasRole('ADMIN')">Welcome Back Admin</h2>
+
+        <h2 th:text="'Showing all posts tagged: ' + ${hashtag.name}"></h2>
+
         <!-- end of title -->
         <br>
         <!-- shows each of the posts -->

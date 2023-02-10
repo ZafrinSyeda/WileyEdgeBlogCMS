@@ -100,6 +100,16 @@ class BlogServiceTest {
     }
 
     /**
+     * tests if the right id is returned by checking the attributes of the hashtag
+     */
+    @Test
+    void getHashtagByName() {
+        Hashtag hashtag = service.getHashtagByName("hello");
+        assertEquals("hello", hashtag.getName());
+        assertEquals(1, hashtag.getId());
+    }
+
+    /**
      * tests if a hashtag that doesn't exist is returned as null
      */
     @Test

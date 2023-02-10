@@ -1,12 +1,14 @@
 package com.company.blog.controllers;
 
 import com.company.blog.dao.PostDaoDB;
+import com.company.blog.entities.Hashtag;
 import com.company.blog.entities.Post;
 import com.company.blog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -30,6 +32,15 @@ public class MainController {
         List<Post> posts = service.getRecentApprovedPosts();
         model.addAttribute("posts", posts);
         return "home";
+    }
+
+    @GetMapping("/hashtagDetail")
+    public String hashtagDetail( String name, Model model) {
+        Hashtag hashtag = service.getHashtagByName(name);
+        List<Post> posts = service.getPostsByHashtag(hashtag);
+        model.addAttribute("hashtag", hashtag);
+        model.addAttribute("posts", posts);
+        return "hashtagDetail";
     }
 
     /**

@@ -118,6 +118,10 @@ public class BlogService {
         return hashtagDao.getHashtagById(id);
     }
 
+    public Hashtag getHashtagByName(String name) {
+        return hashtagDao.getHashtagByName(name);
+    }
+
     /**
      * adds a new hashtag entry to the database
      * @param hashtag the hashtag with all the attributes to be added to the database

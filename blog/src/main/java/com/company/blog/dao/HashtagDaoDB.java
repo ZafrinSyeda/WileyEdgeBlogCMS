@@ -46,7 +46,23 @@ public class HashtagDaoDB implements HashtagDao{
     }
 
     /**
-     * adds a new hashtag entry to the database
+     * retrieves a single hashtag based on the string of the hashtag
+     *
+     * @param name of the hashtag to be retrieved
+     * @return the hashtag that contains the name being searched for
+     */
+    @Override
+    public Hashtag getHashtagByName(String name) {
+        try {
+            final String SELECT_HASHTAG_BY_NAME = "SELECT * FROM hashtag WHERE name = ?";
+            return jdbc.queryForObject(SELECT_HASHTAG_BY_NAME, new HashtagMapper(), name);
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
+    /**
+     * adds a new hashtag entry to the databases
      *
      * @param hashtag the hashtag with all the attributes to be added to the database
      * @return the hashtag object being added
